@@ -31,6 +31,13 @@ test_set = subset(dataset, split == FALSE)
 # install.packages("rpart")
 library(rpart)
 decision_tree_classifier = rpart(Personal.Loan~.,data = training_set)
+decision_tree_classifier ## Shows nodes of a tree
+
+decision_tree_classifier = rpart(Personal.Loan~.,data = training_set, control = c(cp=0.001L))
+plotcp(decision_tree_classifier) ## choose a cp value using graph
+
+decision_tree_classifier = rpart(Personal.Loan~.,data = training_set, 
+                                 control = rpart.control(minsplit = 15, maxdepth = 6, minbucket = 5, cp = 0)) ## override default value of cp 
 
 # install.packages("rpart.plot")
 library(rpart.plot)
