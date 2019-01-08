@@ -147,12 +147,14 @@ table(testData$survived, preds$class,dnn=c('acts','preds'))
 
 
 ####### Random Forest
+install.packages("randomForest")
 library(randomForest)
 rfmod = randomForest(survived~.,
                      data = trainData,
-                     ntree=150,
-                     mtry=4,
-                     nodesize=5,maxnodes=10,
+                     ntree=150, ## No of trees
+                     mtry=4, ## No of Columns to pick at any level
+                     nodesize=5, ## Min size of terminal nodes
+                     maxnodes=10, ## Max no. of terminal nodes
                      classwt=c(1,1.5),
                      strata = trainData$survived)
 #,classwt = c(1,100000)mtry=5
